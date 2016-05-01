@@ -1,2 +1,2 @@
 # EclipseBot
-A twitch bot for MsGtGunny
+A twitch bot for MsGtGunny to replace RevloBot with.
