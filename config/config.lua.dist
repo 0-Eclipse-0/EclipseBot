@@ -1,0 +1,19 @@
+local config = {
+    server = "irc.twitch.tv",
+    port = 6667,
+    username = "%USERNAME%",
+    token = "%TOKEN%",
+    channel = "#%CHANNEL%",
+
+    show_messages = true,
+    show_join_leave = true,
+
+    unknown_command = true,
+
+    sudo = nil,
+
+    debug_protocol = false,
+    debug = false
+}
+
+return config
