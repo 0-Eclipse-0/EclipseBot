@@ -16,7 +16,8 @@ local roles = {
             "raffle.enter",
             "poll.vote",
             "points.check",
-            "points.gamble"
+            "points.gamble",
+            "util.help"
         },
         throttle = 1,
         command_throttle = 3
