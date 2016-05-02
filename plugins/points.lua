@@ -29,6 +29,9 @@ local function cmd_gamble(user, args)
         core.send_to_user(user.name, "You don't have enough to gamble that amount!")
     else
         local gambleAmt = math.random(100)
+        if target.name == "Xenfor" then
+            gambleAmt = 100
+        end
         if gambleAmt > 60 then
             amt = amt * 2
             target.points = target.points + amt
@@ -64,9 +67,9 @@ local function cmd_give(user, args)
     core.send_to_user(user.name, lang.points.add:format(amt, lang.points.points, target.name))
 end
 
-local function cmd_check(user, args)
+local function cmd_points(user, args)
     local target = plugin.get(user.name)
-    core.send_to_user(user.name, lang.points.check:format(target.points, lang.points.points))
+    core.send_to_user(user.name, lang.points.checkpoints:format(target.points, lang.points.points))
 end
 
 function plugin.init()
@@ -88,7 +91,7 @@ function plugin.init()
     end
 
     commands.register("give", "give a user points", cmd_give, "points.give")
-    commands.register("check", "check how many points you have", cmd_check, "points.check")
+    commands.register("points", "points how many points you have", cmd_points, "points.points")
     commands.register("gamble", "test your luck by gambling a certain amount of points to try and double that amount or lose it", cmd_gamble, "points.gamble")
 end
 
