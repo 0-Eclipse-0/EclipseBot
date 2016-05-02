@@ -65,6 +65,12 @@ function core.init()
         return client:send(message)
     end)
 
+    function core.send(message)
+        local last = send_queue.last + 1
+        send_queue.last = last
+        send_queue[last] = message
+    end
+
     if config.debug_protocol then
         irc:set_callback("RAW", function(send, message)
             print(("%s %s"):format(send and ">>>" or "<<<", message))
@@ -78,6 +84,7 @@ function core.init()
     irc:set_callback("JOIN", function(self, sender)
         if config.show_join_leave then
             print(sender[1] .. " joined")
+            core.send(sender[1] .. " has joined your channel MrDestructoid . Mod him to experience his full potential! Just remember not to be PJSalt y while he is mod or you may feel his wrath!")
         end
 
         local user = users.get(sender[1])
@@ -90,6 +97,7 @@ function core.init()
     if config.show_join_leave then
         irc:set_callback("PART", function(sender)
             print(sender[1] .. " left")
+            core.send(sender[1], " left")
         end)
     end
 
@@ -166,12 +174,6 @@ end
 function core.stop()
     print("Stopping EBot")
     running = false
-end
-
-function core.send(message)
-    local last = send_queue.last + 1
-    send_queue.last = last
-    send_queue[last] = message
 end
 
 function core.send_to_user(user, message)
